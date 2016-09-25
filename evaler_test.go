@@ -84,8 +84,8 @@ var testsEvalSymbols = []struct {
 	{"1**x", map[string]string{"x": "100"}, big.NewRat(1, 1), true},                                // sanity
 	{"9**x", map[string]string{"x": "-.5"}, big.NewRat(3333333333333333, 10000000000000000), true}, // basic negative value passed in for variable
 	{"9**-x", map[string]string{"x": ".5"}, big.NewRat(3333333333333333, 10000000000000000), true}, // negative of variable
-	//{"t", map[string]string{"t": "5"}, big.NewRat(5, 1), true},                                     // test variables that could be misinterpreted as operators
-	//{"x", map[string]string{"t": "5"}, nil, false},                                                 // unassigned variable
+	{"t", map[string]string{"t": "5"}, big.NewRat(5, 1), true},                                     // test variables that could be misinterpreted as operators
+	{"x", map[string]string{"t": "5"}, nil, false},                                                 // unassigned variable
 	{"sin(x)", map[string]string{"x": "1"}, big.NewRat(1682941969615793, 2000000000000000), true},       // negative of variable
 	{"sin(x)*(x+1)", map[string]string{"x": "1"}, big.NewRat(1682941969615793, 1000000000000000), true}, // negative of variable
 	{"sin(x)**-1", map[string]string{"x": "1"}, big.NewRat(2970987764473183, 2500000000000000), true},   // switcharoo

@@ -28,7 +28,6 @@ var symbols_rx *regexp.Regexp
 // Operator '@' means unary minus
 var operators = "-+**/<>@"
 
-var functions = "sincostanlnarcsinarccosarctan"
 var functions_rx = regexp.MustCompile(`(sin|cos|tan|ln|arcsin|arccos|arctan)`)
 
 // prec returns the operator's precedence
@@ -41,7 +40,7 @@ func prec(op string) (result int) {
 		result = 3
 	} else if op == "@" {
 		result = 4
-	} else if strings.Contains(functions, op) {
+	} else if functions_rx.MatchString(op) {
 		result = 5
 	}
 	return
@@ -53,7 +52,7 @@ func opGTE(op1, op2 string) bool {
 }
 
 func isFunction(token string) bool {
-	return strings.Contains(functions, token)
+	return functions_rx.MatchString(token)
 }
 // isOperator returns true if token is an operator
 func isOperator(token string) bool {
